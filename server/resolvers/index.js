@@ -1,9 +1,7 @@
-module.exports = {
-    Query: {
-        launches: (_, __, {dataSources}) => dataSources.spacexAPI.getAllLaunches(),
-        // launch: (_, {id}, {dataSources}) => dataSources.spacexAPI.getLaunchById(id),
-    },
-    Mutation: {
+const spacexResolver = require('./spacex');
+const employeeResolver = require('./employee');
 
-    }
-}
+module.exports = [
+    spacexResolver,
+    employeeResolver
+];

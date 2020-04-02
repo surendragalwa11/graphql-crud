@@ -3,7 +3,9 @@ const {ApolloServer} = require('apollo-server');
 const typeDefs = require('./typedefs/employee');
 const resolvers = require('./resolvers');
 const dataSources = require('./datasources');
+const initDb = require('./config/connect-database');
 
+initDb();
 
 const server = new ApolloServer({
     typeDefs,

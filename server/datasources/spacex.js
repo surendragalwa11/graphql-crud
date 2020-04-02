@@ -13,7 +13,7 @@ class SpacexDataSource extends RESTDataSource {
 
     async getLaunchById({launchId}) {
         const response = await this.get('launches', { flight_number: launchId });
-        return this.launchReducer(response[0]);
+        return response[0];
     }
 
     getLaunchesByIds({ launchIds }) {

@@ -1,27 +1,27 @@
 const { gql } = require('apollo-server');
 
-// const employeeSchema = type Launch {
-//     id: ID!,
-//     site: String,
-//     mission: Mission,
-//     rocket: Rocket,
-//     isBooked: Boolean!,
-//   };
-
-
 const employeeTypedef = gql `
-    type Employee {
-        id: ID!
-        name: String
-        address: Address
+    type EmployeeInfo {
+        employeeAddress: String
+        employeeContact: Int
     }
 
-    type Address {
-        plotNumber: String
-        landmark: String
-        district: String
-        state: String
-        pin: Int
+    input EmployeeInfoInput {
+        employeeAddress: String
+        employeeContact: Int
+    }
+
+    type Employee {
+        _id: ID
+        employeeName: String
+        employeeId: String
+        employeeInfo: EmployeeInfo
+    }
+
+    input EmployeeInput {
+        employeeName: String
+        employeeId: String
+        employeeInfo: EmployeeInfoInput
     }
 
     type Launch {
@@ -34,20 +34,22 @@ const employeeTypedef = gql `
     }
 
     type Query {
-        launches: [Launch],
+        launches: [Launch]
+        launch(id: ID!): Launch
         getAllEmployees: [Employee]
         getEmployeeById(id: ID!): Employee
     }
 
     type employeeMutationResponse {
-        success: Boolean!
-        message: String
-        employeeId: ID
+        nModified: Int
+        ok: Int
+        n: Int
     }
 
     type Mutation {
-        editEmployee(id: [ID]!): employeeMutationResponse!
-        deleteEmployee(id: ID!): employeeMutationResponse!
+        createEmployee(employee: EmployeeInput): String
+        updateEmployee(id: ID!, updateInfo: EmployeeInput): employeeMutationResponse
+        deleteEmployee(id: ID!): employeeMutationResponse
     }
 `;
 
