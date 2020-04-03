@@ -3,12 +3,12 @@ const { gql } = require('apollo-server');
 const employeeTypedef = gql `
     type EmployeeInfo {
         employeeAddress: String
-        employeeContact: Int
+        employeeContact: Float
     }
 
     input EmployeeInfoInput {
         employeeAddress: String
-        employeeContact: Int
+        employeeContact: Float
     }
 
     type Employee {
